@@ -547,20 +547,20 @@ if Controls then
 		-- Calculate the generator polynomials for sizes in supplied in 'list'. OK
 		createGeneratorPolynomial = function(self, list)
 			local function generator(poly, alpha)
-			local alpha = {alpha, 0}
-			local result = {}
-			for x, a in ipairs(poly) do
-				for X, A in ipairs(alpha) do
-					local eA, eX = a + A, x + X - 2
-					local newA, newX = (eA % 256) + math.floor(eA / 256), (eX % 256) + math.floor(eX / 256) + 1
-					if result[newX] then
-						result[newX] = self.log[self.antilog[result[newX]] ~ self.antilog[newA]]  -- If we already have a result for x, do galois addition.
-					else
-						result[newX] = newA
+				local alpha = {alpha, 0}
+				local result = {}
+				for x, a in ipairs(poly) do
+					for X, A in ipairs(alpha) do
+						local eA, eX = a + A, x + X - 2
+						local newA, newX = (eA % 256) + math.floor(eA / 256), (eX % 256) + math.floor(eX / 256) + 1
+						if result[newX] then
+							result[newX] = self.log[self.antilog[result[newX]] ~ self.antilog[newA]]  -- If we already have a result for x, do galois addition.
+						else
+							result[newX] = newA
+						end
 					end
 				end
-			end
-			return result
+				return result
 			end
 
 			-- Find the highest GP required.
