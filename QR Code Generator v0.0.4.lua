@@ -36,7 +36,7 @@ this source code, it limits the author’s responsibility and liability related 
           Generate a bitmap image from a matrix. (Scale matrix first)       qr:generateBitmap( matrix (table) )                                                             callback passes: bitmap (binary)
 --]]
 
-PluginVersion = "0.0.2"
+PluginVersion = "0.0.4"
 Infobox = ("QR Code Generator v%s\r\n© Callum Brieske"):format(PluginVersion)
 PluginInfo =
 {
@@ -997,6 +997,9 @@ if Controls then
 						table.remove(state.data, 1)
 						table.insert(state.data, 0)
 						state.divStep = state.divStep + 1
+                      
+						-- Prepare lead term for next multiply.
+						state.firstTerm = self.log[state.data[1]]
 					else
 						-- Multiply the generator term by the lead message term.
 						local alphaGP = self.generatorPolynomial[n][#self.generatorPolynomial[n] - state.expStep + 1] and (self.generatorPolynomial[n][#self.generatorPolynomial[n] - state.expStep + 1] + state.firstTerm) % 255 or -1
