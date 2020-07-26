@@ -36,7 +36,7 @@ this source code, it limits the author’s responsibility and liability related 
           Generate a bitmap image from a matrix. (Scale matrix first)       qr:generateBitmap( matrix (table) )                                                             callback passes: bitmap (binary)
 --]]
 
-PluginVersion = "0.0.4"
+PluginVersion = "0.0.5"
 Infobox = ("QR Code Generator v%s\r\n© Callum Brieske"):format(PluginVersion)
 PluginInfo =
 {
@@ -1489,7 +1489,7 @@ if Controls then
 		Medium = 2000,
 		High = 3000
 	}
-	json = require("json")
+	json = require("rapidjson")
 	qr:init( cpu_levels[Properties["CPU Usage"].Value], Properties["QR Code Count"].Value * 2 ) -- 3000 is roughly the maximum safe value based on testing. Reducing the number reduces CPU load, but increases encode time.
 
 	-- Populate the list of UCI's.
